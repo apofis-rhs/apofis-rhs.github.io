@@ -186,7 +186,7 @@
             var d = document.createElement("button");
             d.type = "button";
             d.setAttribute("aria-label", "Ir a la foto " + (i + 1));
-            d.addEventListener("click", function () { go(i); });
+            d.addEventListener("click", function () { go(dotBtns.indexOf(d)); });
             dots.appendChild(d);
             return d;
         });
@@ -225,6 +225,24 @@
                 if (v && j !== i) v.pause();
             });
         }
+
+        // Si una foto ya no existe (la borraste y la lista quedó vieja), se quita del carrusel
+        // en vez de dejar un recuadro vacío
+        slides.forEach(function (s) {
+            var media = s.querySelector("img, video");
+            if (!media) return;
+            media.addEventListener("error", function () {
+                var i = slides.indexOf(s);
+                if (i === -1) return;
+                slides.splice(i, 1);
+                dotBtns.splice(i, 1)[0].remove();
+                s.remove();
+                if (slides.length <= 1) { prev.remove(); next.remove(); }
+                if (!slides.length) { root.remove(); foot.remove(); }
+                current = -1;
+                update();
+            });
+        });
 
         prev.addEventListener("click", function () { go(index() - 1); });
         next.addEventListener("click", function () { go(index() + 1); });

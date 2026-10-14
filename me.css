@@ -1,0 +1,1714 @@
+/* =========================================================
+   Fuente de los títulos: Yasashii Bold
+   Pon el archivo en la carpeta fonts/ con alguno de estos nombres:
+   Yasashii-Bold.woff2, Yasashii-Bold.otf o Yasashii-Bold.ttf
+   (revisa que su licencia permita usarla en una página web)
+   ========================================================= */
+@font-face {
+    font-family: "Yasashii";
+    src: local("Yasashii Bold"), local("Yasashii-Bold"),
+        url("fonts/Yasashii-Bold.woff2") format("woff2"),
+        url("fonts/Yasashii-Bold.otf") format("opentype"),
+        url("fonts/Yasashii-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* =========================================================
+   Paleta: fases de La La Land + cafés de la misma película
+   Colina: azul noche, índigo, violeta, amarillo del vestido
+   Romance: magenta y vino
+   Paseo: coral, durazno y tierras
+   Ensueño: menta
+   ========================================================= */
+:root {
+    --night: #0D1030;
+    --indigo: #332F9B;
+    --periwinkle: #6B74B8;
+    --violet: #8A7FC8;
+    --lilac: #B7A8E0;
+    --yellow: #F2B33F;
+    --gold: #C98A10;
+    --magenta: #8C1250;
+    --wine: #6E0A1A;
+    --coral: #D9604F;
+    --peach: #F8BFB0;
+    --mint: #5BB5A2;
+
+    --plum: #4B3753;
+    --cocoa: #82554A;
+    --tan: #BA8566;
+    --caramel: #A8693F;
+    --cream: #FBF1E4;
+    --sand: #E8D5BC;
+    --chocolate: #4A2C1D;
+    --toasted: #6F4430;
+    --cinnamon: #C98A5B;
+    --mustard: #D9A441;
+    --coral-soft: #D9604F;
+    --peach-soft: #F2C4A8;
+    --espresso: #2B1A12;
+
+    /* Tema claro: cielo de La La Land con toques cálidos */
+    --bg: #F4EFFA;
+    --surface: #FFFBF7;
+    --surface-alt: #EEE8F8;
+    --text: #1F1A47;
+    --text-muted: #5A4E7A;
+    --border: #D8D0EC;
+    --primary: #332F9B;
+    --primary-hover: #25217C;
+    --primary-text: #FFFFFF;
+    --accent: #82554A;
+    --highlight: #D9604F;
+    --sidebar-bg: #E6E0F7;
+    --deco: #332F9B;
+    --shadow: 0 10px 30px -12px rgba(51, 47, 155, .32);
+
+    --radius: 14px;
+    --sidebar-w: 270px;
+    --font-display: "Yasashii", "Poiret One", "Futura", "Century Gothic", sans-serif;
+    --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* Tema oscuro: noche en la colina, con tierras cálidas */
+[data-theme="dark"] {
+    --bg: #0D1030;
+    --surface: #241B3A;
+    --surface-alt: #33244A;
+    --text: #FBF1E4;
+    --text-muted: #D8BFA8;
+    --border: #4B3753;
+    --primary: #F2B33F;
+    --primary-hover: #FFD27A;
+    --primary-text: #0D1030;
+    --accent: #BA8566;
+    --highlight: #E8745F;
+    --sidebar-bg: #0A0A22;
+    --deco: #F2B33F;
+    --shadow: 0 14px 34px -14px rgba(0, 0, 0, .75);
+}
+
+/* =========================================================
+   Base
+   ========================================================= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 76px;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--text);
+    background: var(--bg);
+    overflow-x: clip;
+    transition: background .3s ease, color .3s ease;
+    -webkit-text-size-adjust: 100%;
+    scrollbar-color: var(--accent) transparent;
+}
+
+img,
+video {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    color: inherit;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+blockquote {
+    margin: 0;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+::selection {
+    background: var(--yellow);
+    color: var(--night);
+}
+
+:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+/* Títulos con Yasashii (sin negrita falsa si cae a otra fuente) */
+h1,
+h2,
+h3,
+.brand,
+.topbar-title,
+.fin {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-synthesis: none;
+}
+
+/* Cielo: atardecer lila y durazno en claro, noche con estrellas en oscuro */
+.sky {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(700px 360px at 88% -6%, rgba(242, 179, 63, .42), transparent 70%),
+        radial-gradient(900px 480px at 0% 108%, rgba(217, 96, 79, .20), transparent 70%),
+        linear-gradient(180deg, #D5D0F2 0%, #E6DDF3 28%, #F6E3DC 68%, #FBF1E4 100%);
+}
+
+[data-theme="dark"] .sky {
+    background:
+        radial-gradient(1px 1px at 12% 14%, #FBF1E4 50%, transparent 51%),
+        radial-gradient(1px 1px at 28% 52%, #FBF1E4 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 44% 10%, #F8BFB0 50%, transparent 51%),
+        radial-gradient(1px 1px at 61% 34%, #FBF1E4 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 77% 18%, #F2B33F 50%, transparent 51%),
+        radial-gradient(1px 1px at 90% 58%, #FBF1E4 50%, transparent 51%),
+        radial-gradient(1px 1px at 8% 40%, #B7A8E0 50%, transparent 51%),
+        radial-gradient(1px 1px at 52% 70%, #FBF1E4 50%, transparent 51%),
+        radial-gradient(900px 380px at 50% 112%, rgba(217, 96, 79, .30), transparent 70%),
+        linear-gradient(180deg, #0D1030 0%, #14165A 45%, #2A2A8A 80%, #4B3F9E 100%);
+}
+
+/* Grano de película: apenas se nota, pero se siente analógico */
+.grain {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    opacity: .07;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .9 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+[data-theme="dark"] .grain {
+    filter: invert(1);
+    mix-blend-mode: screen;
+    opacity: .06;
+}
+
+/* =========================================================
+   Menú lateral
+   ========================================================= */
+.sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: var(--sidebar-w);
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border);
+    padding: 1.6rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    z-index: 40;
+    overflow-y: auto;
+    transition: transform .3s ease, background .3s ease;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    text-decoration: none;
+    color: var(--deco);
+    font-size: 1.35rem;
+    line-height: 1.1;
+}
+
+.brand span {
+    color: var(--text);
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+}
+
+.nav-link {
+    display: block;
+    padding: .65rem .9rem;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 500;
+    border-left: 3px solid transparent;
+    transition: background .2s, color .2s, border-color .2s;
+}
+
+.nav-link:hover {
+    background: var(--surface-alt);
+    color: var(--text);
+}
+
+.nav-link.active {
+    background: var(--surface);
+    color: var(--text);
+    border-left-color: var(--yellow);
+    box-shadow: var(--shadow);
+}
+
+/* Farola del póster: se enciende con el modo oscuro */
+.lamp {
+    position: relative;
+    margin-top: auto;
+    align-self: flex-start;
+    margin-left: .6rem;
+    width: 80px;
+    height: 170px;
+    color: var(--text-muted);
+    flex: none;
+}
+
+.lamp svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.lamp .bulb {
+    fill: var(--sand);
+    stroke: currentColor;
+    stroke-width: 1;
+    transition: fill .5s;
+}
+
+.lamp-glow {
+    position: absolute;
+    left: 66%;
+    top: 16%;
+    width: 190px;
+    height: 190px;
+    translate: -50% -50%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(242, 179, 63, .55), rgba(242, 179, 63, .12) 45%, transparent 70%);
+    opacity: 0;
+    transition: opacity .7s ease;
+    pointer-events: none;
+}
+
+[data-theme="dark"] .lamp {
+    color: #B7A8E0;
+}
+
+[data-theme="dark"] .lamp .bulb {
+    fill: var(--yellow);
+    stroke: none;
+}
+
+[data-theme="dark"] .lamp-glow {
+    opacity: 1;
+}
+
+.theme-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .65rem .9rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.theme-pill:hover {
+    border-color: var(--accent);
+}
+
+.theme-toggle .i-sun {
+    display: none;
+}
+
+[data-theme="dark"] .theme-toggle .i-sun {
+    display: block;
+}
+
+[data-theme="dark"] .theme-toggle .i-moon {
+    display: none;
+}
+
+/* Barra superior móvil */
+.topbar {
+    display: none;
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+    padding: .6rem .8rem;
+    padding-top: calc(.6rem + env(safe-area-inset-top, 0px));
+    background: var(--sidebar-bg);
+    border-bottom: 1px solid var(--border);
+}
+
+.topbar-title {
+    font-size: 1.4rem;
+}
+
+.icon-btn {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.scrim {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(13, 16, 48, .6);
+    z-index: 35;
+}
+
+/* =========================================================
+   Contenido principal
+   ========================================================= */
+.main {
+    margin-left: var(--sidebar-w);
+    padding: 2.2rem clamp(1rem, 3vw, 2.6rem) 2rem;
+    max-width: calc(var(--sidebar-w) + 1180px);
+}
+
+.section {
+    margin-top: 3.5rem;
+}
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: background .3s, border-color .3s;
+}
+
+/* Títulos: al final, un pentagrama con su doble barra */
+.deco-title {
+    font-size: clamp(1.7rem, 3.2vw, 2.3rem);
+    line-height: 1.15;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.deco-title::after {
+    content: "";
+    flex: 1;
+    min-width: 36px;
+    height: 17px;
+    background: repeating-linear-gradient(to bottom, var(--deco) 0 1px, transparent 1px 4px);
+    border-right: 3px solid var(--deco);
+    box-shadow: -5px 0 0 -2px var(--deco);
+    opacity: .7;
+}
+
+.lead {
+    color: var(--text-muted);
+    max-width: 62ch;
+    margin-bottom: 1.4rem;
+}
+
+.meta {
+    color: var(--text-muted);
+    font-size: .9rem;
+}
+
+/* =========================================================
+   Pantalla de presentación
+   ========================================================= */
+.hero {
+    display: grid;
+    grid-template-columns: minmax(250px, 320px) 1fr;
+    gap: 1.6rem;
+    align-items: start;
+}
+
+.identity {
+    text-align: center;
+    padding: 1.8rem 1.2rem 1.8rem;
+    position: sticky;
+    top: 1.5rem;
+}
+
+/* Foto en un disco de vinilo, con visor de cámara y sol art déco */
+.stage {
+    position: relative;
+    width: min(220px, 100%);
+    aspect-ratio: 1;
+    margin: .6rem auto 1.6rem;
+    display: grid;
+    place-items: center;
+}
+
+.sunburst {
+    position: absolute;
+    inset: -20%;
+    width: 140%;
+    height: 140%;
+    color: var(--yellow);
+    opacity: .6;
+    animation: slow-turn 90s linear infinite;
+}
+
+.vinyl {
+    position: absolute;
+    inset: -4%;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle, transparent 62%, rgba(255, 255, 255, .07) 62.5%, transparent 64%),
+        radial-gradient(circle, transparent 70%, rgba(255, 255, 255, .06) 70.5%, transparent 72%),
+        radial-gradient(circle, transparent 78%, rgba(255, 255, 255, .06) 78.5%, transparent 80%),
+        conic-gradient(from 20deg, #070820, #232766, #070820, #232766, #070820);
+    box-shadow: 0 0 0 4px var(--yellow), var(--shadow);
+    animation: spin 14s linear infinite;
+}
+
+.vinyl::after {
+    content: "";
+    position: absolute;
+    top: 6%;
+    left: 14%;
+    width: 22%;
+    height: 8%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .12);
+    filter: blur(4px);
+}
+
+.avatar {
+    position: relative;
+    width: 72%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(145deg, var(--violet), var(--indigo));
+    border: 4px solid var(--yellow);
+    display: grid;
+    place-items: center;
+}
+
+.avatar img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-fallback {
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-synthesis: none;
+    font-size: 2rem;
+}
+
+/* Esquinas del visor de la cámara */
+.vf {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border: 0 solid var(--text);
+    opacity: .75;
+}
+
+.vf.tl {
+    top: -10%;
+    left: -10%;
+    border-top-width: 2px;
+    border-left-width: 2px;
+}
+
+.vf.tr {
+    top: -10%;
+    right: -10%;
+    border-top-width: 2px;
+    border-right-width: 2px;
+}
+
+.vf.bl {
+    bottom: -10%;
+    left: -10%;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+}
+
+.vf.br {
+    bottom: -10%;
+    right: -10%;
+    border-bottom-width: 2px;
+    border-right-width: 2px;
+}
+
+.name {
+    font-size: clamp(1.9rem, 3vw, 2.3rem);
+    line-height: 1.08;
+}
+
+.mail {
+    display: inline-block;
+    margin-top: .5rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    border-bottom: 1px dashed var(--accent);
+}
+
+.mail:hover {
+    color: var(--highlight);
+}
+
+.hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    min-width: 0;
+}
+
+.intro {
+    padding: 1.5rem 1.6rem;
+}
+
+.intro p {
+    max-width: 68ch;
+}
+
+/* Setlist: una hoja pegada con cinta, con lo que suena en mi cabeza */
+.setlist {
+    --ink: #2B1A24;
+    --ink-soft: #6B4B45;
+    position: relative;
+    margin-top: 1.6rem;
+    padding: 1.2rem 1.4rem 1.3rem;
+    background: var(--cream);
+    color: var(--ink);
+    border-radius: 3px;
+    rotate: -.6deg;
+    box-shadow: 0 8px 20px -10px rgba(0, 0, 0, .5);
+}
+
+.setlist h3 {
+    font-size: 1.6rem;
+    line-height: 1;
+    margin-bottom: .8rem;
+    padding-bottom: .55rem;
+    border-bottom: 1px dashed rgba(130, 85, 74, .55);
+}
+
+.setlist ol {
+    columns: 2 220px;
+    column-gap: 2rem;
+    counter-reset: song;
+}
+
+.setlist li {
+    break-inside: avoid;
+    counter-increment: song;
+    display: grid;
+    grid-template-columns: 2.2rem 1fr;
+    padding: .3rem 0;
+}
+
+.setlist li::before {
+    content: counter(song);
+    font-family: var(--font-mono);
+    font-size: .8rem;
+    color: var(--coral);
+    padding-top: .18rem;
+}
+
+.setlist li.encore::before {
+    content: "Bis";
+}
+
+.setlist b {
+    display: block;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.setlist span {
+    display: block;
+    font-size: .86rem;
+    color: var(--ink-soft);
+}
+
+.tape {
+    position: absolute;
+    top: -11px;
+    width: 74px;
+    height: 22px;
+    background: rgba(217, 164, 65, .62);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .18);
+}
+
+.tape.l {
+    left: 9%;
+    rotate: -5deg;
+}
+
+.tape.r {
+    right: 9%;
+    rotate: 4deg;
+}
+
+/* Formación académica con formato de README de GitHub */
+.readme {
+    overflow: hidden;
+}
+
+.readme-body {
+    padding: 1.5rem 1.6rem 1.7rem;
+}
+
+.timeline {
+    display: grid;
+    gap: 1.2rem;
+    margin-bottom: 1.6rem;
+}
+
+.timeline li {
+    padding-left: 1.2rem;
+    border-left: 2px solid var(--deco);
+    position: relative;
+}
+
+.timeline li::before {
+    content: "";
+    position: absolute;
+    left: -6px;
+    top: .55rem;
+    width: 10px;
+    height: 10px;
+    background: var(--yellow);
+    transform: rotate(45deg);
+}
+
+.timeline h3 {
+    font-family: var(--font-body);
+    font-size: 1.08rem;
+    font-weight: 700;
+}
+
+.timeline p:last-child {
+    margin-top: .25rem;
+}
+
+/* Tech stack: tarjetitas tipo badge de GitHub, con los colores de la paleta */
+.stack-title {
+    font-size: 1.35rem;
+    line-height: 1.2;
+    margin-bottom: .8rem;
+}
+
+.stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-bottom: .6rem;
+}
+
+.stack:last-of-type {
+    margin-bottom: 1.6rem;
+}
+
+.badge {
+    --t: #FFFFFF;
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    padding: .38rem .7rem;
+    border-radius: 6px;
+    background: var(--b);
+    color: var(--t);
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    font-weight: 500;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, .18);
+    transition: translate .2s ease, box-shadow .2s ease;
+}
+
+.badge:hover {
+    translate: 0 -2px;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, .18);
+}
+
+/* Logo del mismo color que el texto */
+.badge img {
+    width: 14px;
+    height: 14px;
+    filter: brightness(0) invert(1);
+}
+
+/* Fondos claros (menta, violeta, lila): texto y logo oscuros */
+.badge.on-light {
+    --t: var(--night);
+}
+
+.badge.on-light img {
+    filter: brightness(0);
+}
+
+/* El fondo azul noche se pierde en modo oscuro: le damos borde */
+[data-theme="dark"] .badge {
+    outline: 1px solid rgba(255, 255, 255, .12);
+}
+
+.readme-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .8rem;
+}
+
+/* Botones */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .55rem;
+    min-height: 46px;
+    padding: .7rem 1.3rem;
+    border-radius: 999px;
+    font: inherit;
+    font-weight: 700;
+    text-decoration: none;
+    border: 2px solid var(--primary);
+    cursor: pointer;
+    transition: background .2s, color .2s, transform .15s;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: var(--primary-text);
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+    border-color: var(--primary-hover);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--accent);
+}
+
+.btn-ghost:hover {
+    background: var(--accent);
+    color: var(--primary-text);
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+/* Redes sociales: stickers pegados, se enderezan al pasar el cursor */
+.socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .9rem .7rem;
+    padding: .3rem .2rem;
+}
+
+.social {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    min-height: 44px;
+    padding: .45rem 1rem;
+    border-radius: 6px;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--night);
+    background: var(--yellow);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, .2);
+    rotate: -2.5deg;
+    transition: rotate .2s ease, translate .2s ease, box-shadow .2s ease;
+}
+
+.social:nth-child(2) {
+    background: var(--peach);
+    rotate: 2deg;
+}
+
+.social:nth-child(3) {
+    background: var(--violet);
+    rotate: -1.5deg;
+}
+
+.social:nth-child(4) {
+    background: var(--mint);
+    rotate: 3deg;
+}
+
+.social:nth-child(5) {
+    background: var(--tan);
+    rotate: -2deg;
+}
+
+.social:nth-child(6) {
+    background: var(--coral);
+    rotate: 1.5deg;
+}
+
+.social:hover,
+.social:focus-visible {
+    rotate: 0deg;
+    translate: 0 -3px;
+    box-shadow: 0 6px 0 rgba(0, 0, 0, .2);
+}
+
+/* =========================================================
+   Hobbies: carpetas en un rollo de película que abren una galería
+   ========================================================= */
+.film {
+    --hole: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='14'><rect x='7' y='2' width='14' height='10' rx='2.5' fill='%23FBF1E4'/></svg>");
+    position: relative;
+    padding: 40px clamp(.8rem, 2vw, 1.3rem);
+    border-radius: 6px;
+    background: #1B1210;
+    box-shadow: var(--shadow);
+}
+
+.film::before,
+.film::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 14px;
+    background: var(--hole) repeat-x;
+    opacity: .9;
+}
+
+.film::before {
+    top: 12px;
+}
+
+.film::after {
+    bottom: 12px;
+}
+
+/* Degradados de cada hobby con la paleta cálida */
+.hb1 {
+    --f1: var(--chocolate);
+    --f2: var(--mustard);
+}
+
+.hb2 {
+    --f1: var(--toasted);
+    --f2: var(--coral-soft);
+}
+
+.hb3 {
+    --f1: var(--caramel);
+    --f2: var(--peach-soft);
+}
+
+.hb4 {
+    --f1: var(--chocolate);
+    --f2: var(--cinnamon);
+}
+
+.folders {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.1rem;
+    padding-top: 14px;
+}
+
+.folder {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    padding: 0;
+    border: 0;
+    border-radius: 4px 12px 12px 12px;
+    background: linear-gradient(160deg, var(--f2), var(--f1));
+    color: #fff;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    isolation: isolate;
+    transition: translate .25s ease, rotate .25s ease;
+}
+
+.folder::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: 0;
+    width: 42%;
+    height: 16px;
+    background: var(--f2);
+    border-radius: 10px 10px 0 0;
+    clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%);
+    z-index: -1;
+}
+
+.folder:hover,
+.folder:focus-visible {
+    translate: 0 -5px;
+    rotate: -.8deg;
+    outline-offset: 4px;
+}
+
+.folder .cover {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+}
+
+.folder-shade {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(to top, rgba(27, 18, 16, .92), rgba(27, 18, 16, .08) 70%);
+}
+
+/* Numeración de cuadro, como en el borde de un negativo */
+.frame-no {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    z-index: 2;
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    letter-spacing: .08em;
+    color: var(--yellow);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+}
+
+.folder-info {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    padding: 1rem 1.1rem;
+}
+
+.folder-title {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-synthesis: none;
+    font-size: 1.5rem;
+    line-height: 1.1;
+}
+
+.folder-desc {
+    display: block;
+    margin-top: .25rem;
+    font-size: .88rem;
+    opacity: .92;
+}
+
+.folder-meta {
+    display: block;
+    margin-top: .6rem;
+    font-size: .8rem;
+    font-weight: 700;
+    color: var(--peach-soft);
+}
+
+/* Galería: la carpeta abierta */
+body:has(dialog[open]) {
+    overflow: hidden;
+}
+
+.gallery {
+    width: min(1040px, 94vw);
+    max-height: min(90vh, 900px);
+    margin: auto;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surface);
+    color: var(--text);
+    box-shadow: 0 30px 80px -20px rgba(0, 0, 0, .65);
+    overflow: hidden;
+}
+
+.gallery[open] {
+    display: flex;
+    flex-direction: column;
+    animation: open-folder .28s ease-out;
+}
+
+.gallery::backdrop {
+    background: rgba(13, 16, 48, .72);
+    backdrop-filter: blur(3px);
+}
+
+.gallery-head {
+    position: relative;
+    flex: none;
+    padding: 1.3rem 4.2rem 1.3rem 1.5rem;
+    color: #fff;
+    background: linear-gradient(120deg, var(--f1) 0%, var(--f1) 50%, var(--f2) 150%);
+}
+
+.gallery-head h3 {
+    font-size: clamp(1.7rem, 4vw, 2.3rem);
+    line-height: 1.1;
+}
+
+.gallery-head p {
+    margin-top: .3rem;
+    max-width: 60ch;
+    opacity: .92;
+}
+
+.close {
+    position: absolute;
+    top: .9rem;
+    right: .9rem;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, .45);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, .25);
+    color: #fff;
+    cursor: pointer;
+}
+
+.close:hover {
+    background: rgba(0, 0, 0, .45);
+}
+
+.gallery-body {
+    overflow-y: auto;
+    padding: 1.1rem;
+    overscroll-behavior: contain;
+}
+
+/* Carrusel: una foto a la vez; se desliza con flechas, puntos, teclado o el dedo */
+.carousel {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--night);
+}
+
+.carousel:focus-visible {
+    outline-offset: 2px;
+}
+
+.carousel-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    translate: 0 -50%;
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, .45);
+    border-radius: 50%;
+    background: rgba(13, 16, 48, .55);
+    color: #fff;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: background .2s, scale .15s;
+}
+
+.carousel-btn:hover {
+    background: var(--f1);
+    scale: 1.06;
+}
+
+.carousel-btn.prev {
+    left: .8rem;
+}
+
+.carousel-btn.next {
+    right: .8rem;
+}
+
+.carousel-btn.next svg {
+    rotate: 180deg;
+}
+
+.carousel-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: .7rem;
+}
+
+.carousel-dots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .2rem;
+}
+
+/* Botón de 24px para que sea fácil tocarlo; el punto visible es más chico */
+.carousel-dots button {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+}
+
+.carousel-dots button::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--border);
+    transition: background .2s, width .2s;
+}
+
+.carousel-dots button[aria-current="true"]::before {
+    width: 20px;
+    border-radius: 999px;
+    background: var(--yellow);
+}
+
+.carousel-count {
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: .82rem;
+    color: var(--text-muted);
+}
+
+.gallery-empty {
+    color: var(--text-muted);
+    padding: 1rem 0;
+}
+
+/* Subtítulos dentro de una galería (p. ej. Artistas y bandas / Álbumes) */
+.gallery-section {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-synthesis: none;
+    font-size: 1.35rem;
+    margin: 0 0 .6rem;
+}
+
+.gallery-grid + .gallery-section {
+    margin-top: 1.6rem;
+}
+
+/* Cada diapositiva ocupa todo el carrusel; la imagen se ve completa, sin recortes */
+.tile {
+    position: relative;
+    flex: 0 0 100%;
+    width: 100%;
+    height: min(60vh, 560px);
+    margin: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: linear-gradient(145deg, var(--f2), var(--f1));
+}
+
+.tile::before {
+    content: attr(data-label);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-synthesis: none;
+    font-size: 1.2rem;
+    opacity: .85;
+}
+
+.tile img,
+.tile video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tile figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1.4rem .7rem .55rem;
+    font-size: .82rem;
+    color: #fff;
+    background: linear-gradient(to top, rgba(13, 16, 48, .8), transparent);
+    pointer-events: none;
+}
+
+.tile.photo img,
+.tile-video video {
+    object-fit: contain;
+    background: var(--night);
+}
+
+
+/* =========================================================
+   Criptografía, contacto y descargas
+   ========================================================= */
+/* Dos columnas: texto a la izquierda, ficha a la derecha; "¿Sabías que…?" abajo a lo ancho */
+.crypto {
+    padding: 1.8rem clamp(1.2rem, 3vw, 2.2rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+    gap: 1.6rem 2.4rem;
+    align-items: start;
+}
+
+.crypto-main>*+* {
+    margin-top: 1rem;
+}
+
+/* La columna ocupa lo mismo que el texto; lo de adentro la sigue al hacer scroll
+   pero no puede salirse de ella (así no se encima en "¿Sabías que…?") */
+.crypto-side {
+    align-self: stretch;
+}
+
+.crypto-side-inner {
+    position: sticky;
+    top: 1.5rem;
+    display: grid;
+    gap: 1rem;
+}
+
+.facts-card {
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface-alt);
+}
+
+.facts-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-synthesis: none;
+    font-size: 1.25rem;
+    color: var(--deco);
+    margin-bottom: .6rem;
+}
+
+.facts {
+    margin: 0;
+    display: grid;
+    gap: .55rem;
+}
+
+.facts dt {
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.facts dd {
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+/* Fechas: mini línea del tiempo con rombos */
+.dates {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: .55rem;
+    border-left: 2px solid var(--deco);
+}
+
+.dates li {
+    position: relative;
+    padding-left: 1rem;
+    font-size: .92rem;
+    line-height: 1.35;
+}
+
+.dates li::before {
+    content: "";
+    position: absolute;
+    left: -5px;
+    top: .4rem;
+    width: 8px;
+    height: 8px;
+    background: var(--yellow);
+    transform: rotate(45deg);
+}
+
+.dates b {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: .8rem;
+    color: var(--deco);
+}
+
+.crypto h3 {
+    font-size: 1.7rem;
+    line-height: 1.2;
+}
+
+.crypto p {
+    max-width: 75ch;
+}
+
+.crypto h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-synthesis: none;
+    font-size: 1.3rem;
+    line-height: 1.2;
+    margin: 1.8rem 0 0;
+    color: var(--deco);
+}
+
+/* Aportes: lista con rombos amarillos, como la línea del tiempo */
+.contributions {
+    display: grid;
+    gap: .7rem;
+    max-width: 75ch;
+}
+
+.contributions li {
+    position: relative;
+    padding-left: 1.4rem;
+}
+
+.contributions li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .55rem;
+    width: 9px;
+    height: 9px;
+    background: var(--yellow);
+    transform: rotate(45deg);
+}
+
+/* Recuadro "¿Sabías que…?" al final */
+.fact {
+    grid-column: 1 / -1;
+    padding: 1.1rem 1.3rem;
+    border: 2px dashed var(--yellow);
+    border-radius: 12px;
+    background: var(--surface-alt);
+}
+
+.fact p {
+    max-width: none;
+}
+
+.fact-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-synthesis: none;
+    font-size: 1.3rem;
+    margin-bottom: .4rem;
+}
+
+.crypto blockquote {
+    padding: .8rem 1.2rem;
+    border-left: 4px solid var(--yellow);
+    background: var(--surface-alt);
+    border-radius: 0 10px 10px 0;
+    font-style: italic;
+    max-width: 65ch;
+}
+
+.downloads {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+}
+
+.dl {
+    padding: 1.5rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .8rem;
+}
+
+/* Final de la película */
+.footer {
+    margin-top: 4rem;
+    padding: 2.4rem 0 1rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.fin {
+    font-size: clamp(2.6rem, 8vw, 4rem);
+    line-height: 1;
+    color: var(--text);
+}
+
+.credits {
+    margin-top: .8rem;
+    font-size: .92rem;
+}
+
+.copy {
+    margin-top: 1.2rem;
+    font-size: .82rem;
+}
+
+/* =========================================================
+   Animaciones
+   ========================================================= */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes slow-turn {
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes open-folder {
+    from {
+        opacity: 0;
+        transform: translateY(14px) scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .vinyl,
+    .sunburst {
+        animation: none;
+    }
+
+    .gallery[open] {
+        animation: none;
+    }
+
+    .carousel-track {
+        scroll-behavior: auto;
+    }
+
+    .folder,
+    .social,
+    .badge {
+        transition: none;
+    }
+}
+
+/* =========================================================
+   Responsivo
+   ========================================================= */
+@media (max-width: 1100px) {
+    .folders {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 1000px) {
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    /* En pantallas angostas la ficha pasa debajo del texto */
+    .crypto {
+        grid-template-columns: 1fr;
+    }
+
+    .crypto-side-inner {
+        position: static;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .identity {
+        position: static;
+    }
+}
+
+@media (max-width: 900px) {
+    .topbar {
+        display: flex;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        width: min(82vw, 300px);
+        padding-top: calc(1.6rem + env(safe-area-inset-top, 0px));
+        padding-bottom: calc(1.6rem + env(safe-area-inset-bottom, 0px));
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 8px 0 40px rgba(0, 0, 0, .4);
+    }
+
+    body.menu-open .scrim {
+        display: block;
+    }
+
+    body.menu-open {
+        overflow: hidden;
+    }
+
+    .main {
+        margin-left: 0;
+        padding-top: 1.4rem;
+    }
+
+    .section {
+        margin-top: 2.8rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .downloads {
+        grid-template-columns: 1fr;
+    }
+
+    .intro,
+    .readme-body,
+    .dl {
+        padding-left: 1.1rem;
+        padding-right: 1.1rem;
+    }
+
+    .readme-actions .btn,
+    .dl .btn {
+        width: 100%;
+    }
+
+    .setlist ol {
+        columns: 1;
+    }
+
+    .deco-title::after {
+        min-width: 24px;
+    }
+
+    .gallery-head {
+        padding-left: 1.1rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .film {
+        padding-left: .6rem;
+        padding-right: .6rem;
+    }
+
+    .folders {
+        gap: .7rem;
+    }
+
+    .folder-title {
+        font-size: 1.15rem;
+    }
+
+    .folder-desc {
+        display: none;
+    }
+
+    .folder-info {
+        padding: .7rem;
+    }
+
+    .folder-meta {
+        font-size: .72rem;
+        margin-top: .35rem;
+    }
+
+    .gallery {
+        width: 96vw;
+        max-height: 92vh;
+    }
+
+    .gallery-body {
+        padding: .8rem;
+    }
+
+    /* En celular: carrusel más bajo y flechas más chicas (también se desliza con el dedo) */
+    .tile {
+        height: min(48vh, 360px);
+    }
+
+    .carousel-btn {
+        width: 38px;
+        height: 38px;
+    }
+
+    .carousel-btn.prev {
+        left: .4rem;
+    }
+
+    .carousel-btn.next {
+        right: .4rem;
+    }
+}
